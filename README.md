@@ -1,0 +1,239 @@
+<![CDATA[<div align="center">
+
+# 🌿 BlueLedger
+
+**Blockchain-Powered Carbon Credit Verification & Registry Platform**
+
+![Solidity](https://img.shields.io/badge/Solidity-^0.8.20-363636?logo=solidity)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.104-009688?logo=fastapi)
+![XGBoost](https://img.shields.io/badge/XGBoost-ML-FF6600)
+![Supabase](https://img.shields.io/badge/Supabase-BaaS-3ECF8E?logo=supabase)
+
+*End-to-end carbon credit lifecycle management — from satellite imagery to tokenized credits on-chain.*
+
+</div>
+
+---
+
+## 📖 Overview
+
+BlueLedger is a full-stack platform that digitises the carbon credit pipeline. It combines **satellite remote sensing**, **ML-driven biomass estimation**, **explainable AI (XAI)**, and **Ethereum smart contracts** to register, verify, and tokenise carbon credits with tamper-proof integrity.
+
+### Core Workflow
+
+```
+Satellite Data → Biomass ML Model → SHAP Explainability → Verification Pipeline
+       ↓                                                           ↓
+  Map Visualisation                                       Combined Hashing (SHA-256 + SHA-512 + BLAKE2b)
+                                                                   ↓
+                                                        Local Blockchain Ledger
+                                                                   ↓
+                                                  On-Chain Registry & ERC-1155 Minting
+```
+
+---
+
+## ✨ Features
+
+| Area | Capability |
+|------|-----------|
+| **Dashboard** | Real-time project statistics, carbon removed, credits issued |
+| **Projects** | Create, browse, and manage carbon reduction projects with Supabase persistence |
+| **KYC** | Know-Your-Customer onboarding for project proponents and traders |
+| **ACVA** | Accredited Carbon Verification Agency management |
+| **Validation & Verification** | Multi-stage approval pipeline with document review |
+| **XAI / Biomass Prediction** | XGBoost model with SHAP feature importance for transparent decisions |
+| **Liveness Detection** | Code-phrase-based liveness scoring (movement + lip-sync) for evidence authenticity |
+| **Interactive Map** | OpenStreetMap-based project & ACVA geolocation with geocode search |
+| **Satellite Tracking** | Customer satellite constellation viewer |
+| **Blockchain Hashing** | Combined SHA-256 / SHA-512 / BLAKE2b hashing with a local JSON blockchain ledger |
+| **Smart Contracts** | Solidity contracts for registry, ERC-1155 carbon tokens, oracle integration, Merkle proofs, and multi-sig wallets |
+| **Auth & Theming** | Supabase auth with role-based access, light/dark theme support |
+
+---
+
+## 🏗️ Architecture
+
+```
+blueledger-main/
+├── src/                     # React + TypeScript frontend (Vite)
+│   ├── components/
+│   │   ├── Pages/           # 14 page-level components
+│   │   ├── Layout/          # App shell & sidebar
+│   │   ├── Common/          # Error boundary, shared widgets
+│   │   ├── ui/              # Base UI primitives
+│   │   └── ui-bits/         # Toast, Skeleton, etc.
+│   ├── contexts/            # AuthContext, ThemeContext
+│   ├── lib/                 # supabaseService, geminiService, utils
+│   ├── data/                # Mock/seed data
+│   ├── types/               # TypeScript type definitions
+│   └── App.tsx              # Router & state orchestration
+│
+├── server/                  # Backend services
+│   ├── index.js             # Express.js – geocode proxy, XAI mock, map & satellite APIs
+│   ├── biomass_api.py       # FastAPI – XGBoost biomass prediction + SHAP explanations
+│   ├── app/                 # Extended FastAPI application modules
+│   ├── models/              # Serialised ML model artifacts
+│   └── supabase_migration.sql
+│
+├── hashing/                 # Python blockchain module
+│   ├── hash_generator.py    # SHA-256 + SHA-512 + BLAKE2b combined hash
+│   ├── blockchain.py        # Local file-based blockchain (JSON persistence)
+│   └── supabase_watcher.py  # Watches Supabase for new projects, auto-hashes & chains
+│
+├── smart contracts/         # Solidity (Hardhat)
+│   ├── CarbonRegistry.sol   # On-chain project registry with anti-double-counting
+│   ├── CarbonCreditToken.sol# ERC-1155 carbon credit token (1 token = 1 tonne CO₂)
+│   ├── MerkleTreeUtils.sol  # Merkle proof utilities for large dataset verification
+│   ├── OracleConsumer.sol   # Chainlink-style oracle data consumer
+│   └── MultiSigWallet.sol   # Multi-signature wallet for governance
+│
+└── public/                  # Static assets (logos, hero images)
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+| Tool | Version |
+|------|---------|
+| **Node.js** | ≥ 18 |
+| **Python** | ≥ 3.10 |
+| **npm** | ≥ 9 |
+
+### 1. Clone & Install Frontend
+
+```bash
+git clone https://github.com/<your-org>/blueledger.git
+cd blueledger
+
+# Install frontend dependencies
+npm install
+
+# Start the Vite dev server (default: http://localhost:5173)
+npm run dev
+```
+
+### 2. Start the Express Backend
+
+```bash
+cd server
+npm install
+npm start          # → http://localhost:4000
+```
+
+### 3. Start the Biomass Prediction API
+
+```bash
+cd server
+pip install -r requirements.txt
+python biomass_api.py   # → http://localhost:8001
+```
+
+### 4. Run the Blockchain / Hashing Module
+
+```bash
+cd hashing
+pip install -r requirements.txt
+
+# Generate a combined hash
+python hash_generator.py <unique-id>
+
+# Run the Supabase watcher (auto-hashes new projects)
+python supabase_watcher.py
+```
+
+### 5. Environment Variables
+
+Copy the example and fill in your credentials:
+
+```bash
+cp server/.env.example server/.env
+```
+
+Key variables:
+
+| Variable | Purpose |
+|----------|---------|
+| `SUPABASE_URL` / `SUPABASE_KEY` | Supabase project connection |
+| `MODELS_DIR` | Path to serialised ML models |
+| `BLOCKCHAIN_RPC_URL` | Ethereum RPC for smart contracts |
+| `CARBON_REGISTRY_ADDRESS` | Deployed CarbonRegistry contract address |
+| `CARBON_CREDIT_TOKEN_ADDRESS` | Deployed CarbonCreditToken contract address |
+
+---
+
+## 🔗 Smart Contracts
+
+Contracts target **Solidity ^0.8.20** and use OpenZeppelin v5. Deploy with Hardhat:
+
+| Contract | Description |
+|----------|-------------|
+| `CarbonRegistry.sol` | Immutable project registry with Merkle root storage and anti-double-counting |
+| `CarbonCreditToken.sol` | ERC-1155 multi-token; minting requires 3-of-3 multi-sig (verifier, oracle, admin) |
+| `MerkleTreeUtils.sol` | On-chain Merkle proof verification for large dataset integrity |
+| `OracleConsumer.sol` | Consumes external oracle data for satellite/biomass feeds |
+| `MultiSigWallet.sol` | N-of-M multi-signature governance wallet |
+
+See [`smart contracts/INSTALLATION-GUIDE.md`](smart%20contracts/INSTALLATION-GUIDE.md) for deployment steps.
+
+---
+
+## 🤖 ML & Explainability
+
+The **Biomass Prediction API** (`server/biomass_api.py`) runs an **XGBoost** model trained on Sentinel-2 satellite bands:
+
+- **Input**: Spectral bands (B2, B3, B4, B8) + species type
+- **Feature Engineering**: Computes NDVI, GNDVI, NDWI, NDBI, SAR ratios
+- **Output**: Predicted above-ground biomass (tonnes/ha), confidence score, SHAP-based feature importance
+- **Endpoint**: `POST /predict-biomass`
+
+The frontend **XAI Page** visualises SHAP explanations and liveness verification results, providing full transparency into the verification decision.
+
+---
+
+## 🗺️ API Endpoints
+
+### Express Server (`:4000`)
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/api/geocode?q=…` | Proxy to OpenStreetMap Nominatim |
+| `POST` | `/api/xai` | Mock XAI liveness & carbon metrics |
+| `GET` | `/api/mockmap` | Sample project & ACVA locations |
+| `GET` | `/api/satellites` | Customer satellite constellation data |
+
+### FastAPI Biomass Server (`:8001`)
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/` | Health check |
+| `POST` | `/predict-biomass` | Biomass prediction with SHAP explanations |
+
+---
+
+## 🛡️ Security
+
+- **Multi-sig minting** — Carbon credit tokens require signatures from verifier, oracle, and admin
+- **Anti-double-counting** — `CarbonRegistry` flags prevent re-minting for the same project
+- **Reentrancy guards** — OpenZeppelin `ReentrancyGuard` on state-changing contract functions
+- **Combined hashing** — SHA-256 + SHA-512 + BLAKE2b layered hash for tamper evidence
+- **Rate limiting** — Configurable via environment variables
+- **CORS lockdown** — Whitelist-based origin control in production
+
+---
+
+## 📄 License
+
+This project is proprietary. All rights reserved.
+
+---
+
+<div align="center">
+  <sub>Built with 🌍 for a greener future.</sub>
+</div>
+]]>
