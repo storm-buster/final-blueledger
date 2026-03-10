@@ -14,7 +14,7 @@
 
 ## 📖 Overview
 
-NeeLedger is a full-stack platform that digitises the carbon credit pipeline. It combines **satellite remote sensing**, **ML-driven biomass estimation**, **explainable AI (XAI)**, and **Ethereum smart contracts** to register, verify, and tokenise carbon credits with tamper-proof integrity.
+NeeLedger is a full-stack platform that digitises the carbon credit pipeline. It combines **satellite remote sensing**, **ML-driven biomass estimation**, **explainable AI (XAI)**, and **Solidity smart contracts** to register, verify, and tokenise carbon credits with tamper-proof integrity.
 
 ### Core Workflow
 
