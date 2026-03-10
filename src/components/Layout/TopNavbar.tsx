@@ -79,7 +79,7 @@ export default function TopNavbar({ activeSection, onSectionChange }: TopNavbarP
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl border-b border-white/20 dark:border-gray-700/50 shadow-lg transition-colors overflow-visible">
       <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo */}
+          {/* Logo - Modern Bubble Style */}
           <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0 min-w-[260px]">
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-nee-500 to-nee-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity"></div>
@@ -97,7 +97,7 @@ export default function TopNavbar({ activeSection, onSectionChange }: TopNavbarP
             </div>
           </div>
 
-          {/* Navigation Items */}
+          {/* Navigation Items - Bubble Style */}
           <div className="hidden lg:flex items-center gap-1 flex-1 justify-center min-w-0 max-w-[820px] px-2">
             {menuItems.map((item) => {
               const Icon = item.icon;
@@ -114,6 +114,7 @@ export default function TopNavbar({ activeSection, onSectionChange }: TopNavbarP
                   }`}
                   title={item.label}
                 >
+                  {/* Glow effect for active */}
                   {isActive && (
                     <div className="absolute inset-0 bg-gradient-to-r from-nee-400 to-nee-600 rounded-full blur-xl opacity-50 animate-pulse"></div>
                   )}
@@ -123,13 +124,14 @@ export default function TopNavbar({ activeSection, onSectionChange }: TopNavbarP
                     {item.label}
                   </span>
                   
+                  {/* Hover shine effect */}
                   <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </button>
               );
             })}
           </div>
 
-          {/* Right Side Actions */}
+          {/* Right Side Actions - Bubble Style */}
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Dark Mode Toggle */}
             <button 
