@@ -190,7 +190,7 @@ export default function XAIPage() {
                 </label>
               </div>
               <p className="text-xs text-gray-600 dark:text-gray-400">
-                {useGemini ? 'Using both XAI model + Gemini AI for enhanced analysis' : 'Using XAI model only'}
+                {useGemini ? 'Using XAI model for enhanced analysis' : 'Using XAI model only'}
               </p>
             </div>
 
